@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chandan Gajendra - Software Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8;
+            color: #333;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 40;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            z-index: 50;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .modal.active, .modal-backdrop.active {
+            display: block;
+            opacity: 1;
+        }
+         .modal.active {
+            transform: translate(-50%, -50%) scale(1);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-30">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-gray-800">Chandan Gajendra</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="text-gray-600 hover:text-blue-600 transition">About</a>
+                <a href="#skills" class="text-gray-600 hover:text-blue-600 transition">Skills</a>
+                <a href="#projects" class="text-gray-600 hover:text-blue-600 transition">Projects</a>
+                <a href="#education" class="text-gray-600 hover:text-blue-600 transition">Education</a>
+            </div>
+             <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#about" class="block py-2 text-gray-600 hover:text-blue-600 transition">About</a>
+            <a href="#skills" class="block py-2 text-gray-600 hover:text-blue-600 transition">Skills</a>
+            <a href="#projects" class="block py-2 text-gray-600 hover:text-blue-600 transition">Projects</a>
+            <a href="#education" class="block py-2 text-gray-600 hover:text-blue-600 transition">Education</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <section id="about" class="text-center mb-24 scroll-mt-20">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">Software Developer</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
+                Motivated and detail-oriented B.Tech graduate with a strong foundation in Java, Python, and full-stack web development. Proven ability to build functional applications from concept to completion, with hands-on experience in database management and version control. Eager to apply technical skills and problem-solving abilities to a challenging software development role.
+            </p>
+            <div class="flex justify-center space-x-6">
+                 <a href="mailto:chandangajendra12@gmail.com" class="text-blue-600 hover:underline">chandangajendra12@gmail.com</a>
+                 <span class="text-gray-300">|</span>
+                 <a href="https://www.linkedin.com/in/chandangajendra/" target="_blank" class="text-blue-600 hover:underline">LinkedIn</a>
+                 <span class="text-gray-300">|</span>
+                 <a href="https://github.com/Chandan-gajendra" target="_blank" class="text-blue-600 hover:underline">GitHub</a>
+            </div>
+        </section>
+
+        <section id="skills" class="mb-24 scroll-mt-20">
+            <h3 class="text-3xl font-bold text-center text-gray-800 mb-2">Technical Skills</h3>
+            <p class="text-center text-gray-500 mb-12">A visual overview of my technical capabilities across different domains.</p>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-12">
+                <div class="w-full md:w-1/2">
+                    <div class="chart-container">
+                        <canvas id="skillsChart"></canvas>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 grid grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-gray-700">Languages</h4>
+                        <ul class="space-y-1 text-gray-600">
+                            <li>Java</li>
+                            <li>Python</li>
+                            <li>JavaScript</li>
+                            <li>SQL</li>
+                            <li>HTML & CSS</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-gray-700">Databases</h4>
+                        <ul class="space-y-1 text-gray-600">
+                            <li>PostgreSQL</li>
+                            <li>MySQL</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-gray-700">Web Technologies</h4>
+                        <ul class="space-y-1 text-gray-600">
+                            <li>JSP</li>
+                            <li>Servlets</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-gray-700">Tools & Platforms</h4>
+                        <ul class="space-y-1 text-gray-600">
+                            <li>Git & GitHub</li>
+                            <li>Eclipse & VS Code</li>
+                            <li>Apache Tomcat</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="mb-24 scroll-mt-20">
+            <h3 class="text-3xl font-bold text-center text-gray-800 mb-2">Project Portfolio</h3>
+            <p class="text-center text-gray-500 mb-8">Explore my hands-on project experience. Click a project for more details.</p>
+            <div class="flex justify-center space-x-2 mb-12">
+                <button class="filter-btn active bg-blue-600 text-white px-4 py-2 rounded-full" data-filter="all">All</button>
+                <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300" data-filter="java">Java</button>
+                <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300" data-filter="python">Python</button>
+            </div>
+            <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+        </section>
+
+        <section id="education" class="scroll-mt-20">
+            <h3 class="text-3xl font-bold text-center text-gray-800 mb-12">Education & Certifications</h3>
+            <div class="relative max-w-2xl mx-auto">
+                <div class="absolute left-1/2 w-0.5 h-full bg-gray-300 transform -translate-x-1/2"></div>
+            </div>
+        </section>
+
+    </main>
+    
+    <div id="modal-backdrop" class="modal-backdrop"></div>
+    <div id="project-modal" class="modal bg-white rounded-lg shadow-2xl w-11/12 md:max-w-2xl">
+        <div class="p-6 md:p-8">
+            <div class="flex justify-between items-start">
+                 <h4 id="modal-title" class="text-2xl font-bold text-gray-800 mb-2"></h4>
+                <button id="modal-close" class="text-gray-500 hover:text-gray-800">&times;</button>
+            </div>
+            <p id="modal-tags" class="text-sm text-blue-600 font-medium mb-4"></p>
+            <p id="modal-description" class="text-gray-600"></p>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const projectData = [
+                {
+                    title: 'Resume Builder',
+                    category: 'java',
+                    tags: ['Java', 'JSP', 'Servlets', 'MySQL'],
+                    description: 'Developed a full-stack web application that allows users to create, edit, and download professional resumes in various formats. The application features user authentication and data persistence, managed through a MySQL database, demonstrating proficiency in both frontend and backend development.'
+                },
+                {
+                    title: 'Student Management System',
+                    category: 'java',
+                    tags: ['Java', 'PostgreSQL'],
+                    description: 'Designed and implemented a robust Java application to manage student records, attendance, and academic performance. This project showcases strong object-oriented programming principles and uses PostgreSQL to handle data management, ensuring efficient and secure access to information.'
+                },
+                {
+                    title: 'E-Grad Portal',
+                    category: 'java',
+                    tags: ['Java'],
+                    description: 'Built a Java-based web portal for students and faculty to manage academic results and grades. The application provides a secure and user-friendly platform for tracking educational progress and simplifies the process of grade reporting and viewing for both educators and students.'
+                },
+                {
+                    title: 'Employee Management System',
+                    category: 'python',
+                    tags: ['Python'],
+                    description: 'Created a Python-based system for managing employee details, payroll, and performance reports. The system streamlines HR processes by automating data entry and providing quick access to employee information and performance metrics, thereby improving administrative efficiency.'
+                },
+                {
+                    title: 'Virtual Health Partner',
+                    category: 'java',
+                    tags: ['Java'],
+                    description: 'Developed a comprehensive Java web application providing health tips, medical history tracking, and a virtual consultation interface. This project was designed to empower users to manage their health proactively by providing accessible tools and reliable information.'
+                }
+            ];
+
+            const educationData = [
+                { year: '2024', title: 'B.Tech in Computer Science & Engineering', institution: 'Silicon University, Bhubaneswar (7.65 CGPA)', type: 'education' },
+                { year: '2022', title: 'Advanced Java with J2EE', institution: 'Syllogistic System', type: 'certification' },
+                { year: '2021', title: 'Python for Beginners', institution: 'Syllogistic System', type: 'certification' },
+                { year: '2020', title: 'XII (Science)', institution: 'Khallikote College, Brahmapur (64.33%)', type: 'education' },
+                { year: '2018', title: 'X (Matriculation)', institution: 'Saraswati Sishu Vidya Mandir, Brahmapur (83.3%)', type: 'education' },
+            ];
+
+            const projectGrid = document.getElementById('project-grid');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            
+            const modal = document.getElementById('project-modal');
+            const modalBackdrop = document.getElementById('modal-backdrop');
+            const modalTitle = document.getElementById('modal-title');
+            const modalTags = document.getElementById('modal-tags');
+            const modalDescription = document.getElementById('modal-description');
+            const modalClose = document.getElementById('modal-close');
+
+            function renderProjects(filter = 'all') {
+                projectGrid.innerHTML = '';
+                const filteredProjects = filter === 'all' ? projectData : projectData.filter(p => p.category === filter);
+                
+                filteredProjects.forEach(project => {
+                    const card = document.createElement('div');
+                    card.className = `project-card bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-1 transition-all duration-300 cursor-pointer ${project.category}`;
+                    card.innerHTML = `
+                        <div class="p-6">
+                            <h4 class="font-bold text-xl mb-2 text-gray-800">${project.title}</h4>
+                            <p class="text-gray-500 text-sm">${project.tags.join(' • ')}</p>
+                        </div>
+                    `;
+                    card.addEventListener('click', () => openModal(project));
+                    projectGrid.appendChild(card);
+                });
+            }
+
+            function openModal(project) {
+                modalTitle.textContent = project.title;
+                modalTags.textContent = project.tags.join(' • ');
+                modalDescription.textContent = project.description;
+                modal.classList.add('active');
+                modalBackdrop.classList.add('active');
+            }
+
+            function closeModal() {
+                modal.classList.remove('active');
+                modalBackdrop.classList.remove('active');
+            }
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active', 'bg-blue-600', 'text-white'));
+                    filterBtns.forEach(b => b.classList.add('bg-gray-200', 'text-gray-700'));
+                    btn.classList.add('active', 'bg-blue-600', 'text-white');
+                    btn.classList.remove('bg-gray-200', 'text-gray-700');
+                    renderProjects(btn.dataset.filter);
+                });
+            });
+
+            modalClose.addEventListener('click', closeModal);
+            modalBackdrop.addEventListener('click', closeModal);
+
+            const educationSection = document.getElementById('education');
+            const timelineContainer = educationSection.querySelector('.relative');
+
+            educationData.forEach((item, index) => {
+                const isLeft = index % 2 === 0;
+                const timelineItem = document.createElement('div');
+                timelineItem.className = `mb-8 flex justify-between items-center w-full ${isLeft ? 'flex-row-reverse' : ''}`;
+                const emptyDiv = '<div class="hidden md:block w-5/12"></div>';
+                const contentDiv = `
+                    <div class="w-full md:w-5/12">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <p class="font-bold text-gray-500 text-sm mb-1">${item.year}</p>
+                            <h4 class="font-bold text-lg mb-1 text-gray-800">${item.title}</h4>
+                            <p class="text-gray-600">${item.institution}</p>
+                        </div>
+                    </div>
+                `;
+                timelineItem.innerHTML = `
+                    ${isLeft ? contentDiv : emptyDiv}
+                    <div class="z-10 flex items-center bg-blue-600 shadow-xl w-8 h-8 rounded-full">
+                        <span class="mx-auto text-white text-lg font-semibold">${item.type === 'education' ? '🎓' : '⭐'}</span>
+                    </div>
+                    ${isLeft ? emptyDiv : contentDiv}
+                `;
+                timelineContainer.appendChild(timelineItem);
+            });
+
+            const skillsCtx = document.getElementById('skillsChart').getContext('2d');
+            new Chart(skillsCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Languages', 'Web Tech', 'Databases', 'Tools & Platforms'],
+                    datasets: [{
+                        label: 'Skill Proficiency',
+                        data: [90, 80, 85, 88],
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                            grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                            pointLabels: { font: { size: 14 } },
+                            ticks: {
+                                backdropColor: 'transparent',
+                                color: 'rgba(0,0,0,0.5)',
+                                stepSize: 25,
+                                beginAtZero: true,
+                                max: 100,
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    if (mobileMenu.classList.contains('hidden') === false){
+                        mobileMenu.classList.add('hidden')
+                    }
+                });
+            });
+
+            renderProjects();
+        });
+    </script>
+</body>
+</html>
